@@ -10,7 +10,7 @@ public class CalculatorUI extends JFrame implements ActionListener {
     JLabel displayLabel;
 
     public CalculatorUI() {
-        super();
+        super("Hello Swing Calculator");
 
         // Make fonts bigger in the whole app
         UIManager.put("Label.font", new FontUIResource(new Font("Dialog", Font.PLAIN, 20)));
@@ -54,7 +54,7 @@ public class CalculatorUI extends JFrame implements ActionListener {
         equalButton.addActionListener(this);
         panel.add(equalButton, equalButtonConstraints);
 
-        setPreferredSize(new Dimension(200, 300));
+        setPreferredSize(new Dimension(400, 600));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
