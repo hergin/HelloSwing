@@ -51,10 +51,19 @@ public class CalculatorUI extends JFrame implements ActionListener {
 
         JButton equalButton = new JButton("=");
         var equalButtonConstraints = new GridBagConstraints(1, 2, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 1, 1, 1), 0, 0);
-        equalButton.addActionListener(this);
+        equalButton.addActionListener(new EqualButtonHandler(theCalculator, displayLabel));
         panel.add(equalButton, equalButtonConstraints);
 
-        setPreferredSize(new Dimension(400, 600));
+        JButton openChartButton = new JButton("Open Chart");
+        var openChartButtonConstraints = new GridBagConstraints(0, 3, 2, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 1, 1, 1), 0, 0);
+        openChartButton.addActionListener(e -> {
+            var theChart = new PieChart("Comparison","");
+            theChart.pack();
+            theChart.setVisible(true);
+        });
+        panel.add(openChartButton,openChartButtonConstraints);
+
+        setPreferredSize(new Dimension(400, 800));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
@@ -66,12 +75,6 @@ public class CalculatorUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (((JButton) e.getSource()).getText().equals("=")) {
-            theCalculator.add(displayLabel.getText());
-            displayLabel.setText(theCalculator.getMainNumber());
-        } else {
-            theCalculator.storeAndResetMainNumber();
-            displayLabel.setText(theCalculator.getMainNumber());
-        }
+        displayLabel.setText(((JButton) e.getSource()).getText());
     }
 }
