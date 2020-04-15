@@ -3,6 +3,7 @@ import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 
 public class CalculatorUI extends JFrame implements ActionListener {
 
@@ -57,11 +58,11 @@ public class CalculatorUI extends JFrame implements ActionListener {
         JButton openChartButton = new JButton("Open Chart");
         var openChartButtonConstraints = new GridBagConstraints(0, 3, 2, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 1, 1, 1), 0, 0);
         openChartButton.addActionListener(e -> {
-            var theChart = new PieChart("Comparison","");
+            var theChart = new PieChart("Comparison", "");
             theChart.pack();
             theChart.setVisible(true);
         });
-        panel.add(openChartButton,openChartButtonConstraints);
+        panel.add(openChartButton, openChartButtonConstraints);
 
         setPreferredSize(new Dimension(400, 800));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -70,6 +71,22 @@ public class CalculatorUI extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
+
+        Runnable r = new Runnable() {
+
+            LocalDateTime fiveSecondsLater = LocalDateTime.now().plusSeconds(5);
+
+            @Override
+            public void run() {
+                while (LocalDateTime.now().isBefore(fiveSecondsLater)) {
+                }
+                JOptionPane.showMessageDialog(null, "5 seconds passed");
+            }
+        };
+        Thread t = new Thread(r);
+        t.start();
+
+
         new CalculatorUI();
     }
 
